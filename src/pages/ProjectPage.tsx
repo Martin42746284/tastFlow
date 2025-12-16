@@ -303,68 +303,72 @@ const ProjectPage = () => {
             </button>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 pt-2">
-            {canChangeStatus ? (
-              <Select value={project.status} onValueChange={handleStatusChange}>
-                <SelectTrigger className="w-full sm:w-40">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Actif">Actif</SelectItem>
-                  <SelectItem value="Inactif">Inactif</SelectItem>
-                  <SelectItem value="Archivé">Archivé</SelectItem>
-                </SelectContent>
-              </Select>
-            ) : (
-              <div className="w-full sm:w-40 px-3 py-2 border border-border rounded-md bg-muted text-sm">
-                {project.status}
-              </div>
-            )}
+          <div className="flex flex-col sm:flex-row gap-2 pt-2 justify-between">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              {canChangeStatus ? (
+                <Select value={project.status} onValueChange={handleStatusChange}>
+                  <SelectTrigger className="w-full sm:w-40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Actif">Actif</SelectItem>
+                    <SelectItem value="Inactif">Inactif</SelectItem>
+                    <SelectItem value="Archivé">Archivé</SelectItem>
+                  </SelectContent>
+                </Select>
+              ) : (
+                <div className="w-full sm:w-40 px-3 py-2 border border-border rounded-md bg-muted text-sm">
+                  {project.status}
+                </div>
+              )}
 
-            {canManageTeam && (
-              <Button variant="outline" onClick={() => setTeamDialogOpen(true)} className="w-full sm:w-auto">
-                <Users className="h-4 w-4 mr-2" />
-                <span className="hidden sm:inline">Équipe</span>
-                <span className="sm:hidden">Gérer</span>
-              </Button>
-            )}
+              {canManageTeam && (
+                <Button variant="outline" onClick={() => setTeamDialogOpen(true)} className="w-full sm:w-auto">
+                  <Users className="h-4 w-4 mr-2" />
+                  <span className="hidden sm:inline">Équipe</span>
+                  <span className="sm:hidden">Gérer</span>
+                </Button>
+              )}
+            </div>
 
-            {canCreateTicket && (
-              <Button onClick={() => setCreateTicketOpen(true)} className="w-full sm:w-auto">
-                <Plus className="h-4 w-4 mr-2" />
-                <span className="hidden sm:inline">Ajouter un ticket</span>
-                <span className="sm:hidden">Ajouter</span>
-              </Button>
-            )}
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              {canCreateTicket && (
+                <Button onClick={() => setCreateTicketOpen(true)} className="w-full sm:w-auto">
+                  <Plus className="h-4 w-4 mr-2" />
+                  <span className="hidden sm:inline">Ajouter un ticket</span>
+                  <span className="sm:hidden">Ajouter</span>
+                </Button>
+              )}
 
-            {canDeleteProject && (
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="outline" size="icon" className="text-destructive hover:text-destructive hover:bg-destructive/10 w-full sm:w-auto">
-                    <Trash2 className="h-4 w-4" />
-                    <span className="sm:hidden ml-2">Supprimer</span>
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Supprimer le projet</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      Êtes-vous sûr de vouloir supprimer "{project.name}" ? Cette action est
-                      irréversible et supprimera tous les tickets associés.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Annuler</AlertDialogCancel>
-                    <AlertDialogAction
-                      onClick={handleDelete}
-                      className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                    >
-                      Supprimer
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            )}
+              {canDeleteProject && (
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="outline" size="icon" className="text-destructive hover:text-destructive hover:bg-destructive/10 w-full sm:w-auto">
+                      <Trash2 className="h-4 w-4" />
+                      <span className="sm:hidden ml-2">Supprimer</span>
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Supprimer le projet</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Êtes-vous sûr de vouloir supprimer "{project.name}" ? Cette action est
+                        irréversible et supprimera tous les tickets associés.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Annuler</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={handleDelete}
+                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                      >
+                        Supprimer
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              )}
+            </div>
           </div>
         </div>
 
